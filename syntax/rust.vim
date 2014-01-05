@@ -28,10 +28,13 @@ syn keyword   rustKeyword     use nextgroup=rustModPath skipwhite
 " FIXME: Scoped impl's name is also fallen in this category
 syn keyword   rustKeyword     mod trait struct enum type nextgroup=rustIdentifier skipwhite
 syn keyword   rustKeyword     fn nextgroup=rustFuncName skipwhite
-syn keyword   rustStorage     const mut ref static
+syn keyword   rustStorage     static mut ref static
+syn keyword   rustDeprecated  const
 
 syn match     rustIdentifier  contains=rustIdentifierPrime "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 syn match     rustFuncName    "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
+syn match     rustConstant    "\%(\%([.@$]\@<!\.\)\@<!\<\|::\)\_s*\zs\u\w*\%(\>\|::\)\@=\%(\s*(\)\@!"
+
 
 " Reserved (but not yet used) keywords {{{2
 syn keyword   rustKeyword     alignof be offsetof pure sizeof typeof yield
@@ -242,6 +245,8 @@ hi def link rustAttribute     PreProc
 hi def link rustDeriving      PreProc
 hi def link rustStorage       StorageClass
 hi def link rustLifetime      Special
+hi def link rustDeprecated    Error
+hi def link rustConstant    Type
 
 " Other Suggestions:
 " hi rustAttribute ctermfg=cyan
